@@ -6,3 +6,15 @@
 //
 
 import Foundation
+
+struct CitiesRequest {
+    let expectedMaxCount: Int
+    let keyword: String
+    
+    var queryItems: [URLQueryItem] {
+        return [
+            URLQueryItem(name: "max", value: String(expectedMaxCount)),
+            URLQueryItem(name: "keyword", value: keyword)
+        ]
+    }
+}

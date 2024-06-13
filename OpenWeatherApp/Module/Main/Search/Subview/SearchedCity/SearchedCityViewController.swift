@@ -8,42 +8,73 @@
 import UIKit
 
 class SearchedCityViewController: UIViewController {
+    private var presenter: WeatherDetailsPresenterProtocol?
+    private var loadedView: SearchedCityLoadedView?
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        presenter?.viewDidLoad()
+        
+        setupUI()
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    func configure(with presenter: WeatherDetailsPresenterProtocol) {
+        self.presenter = presenter
     }
-    */
-
+    
+    private func setupUI() {
+        view.backgroundColor    = .secondarySystemBackground
+        view.layer.cornerRadius = 11
+        
+        setupTapGesture()
+    }
+    
+    private func setupTapGesture() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap))
+        view.addGestureRecognizer(tapGesture)
+    }
+    
+    @objc private func handleTap() {
+        presenter?.navigateToFullView()
+    }
 }
 
 extension SearchedCityViewController: WeatherDetailsViewProtocol {
     func showLoadingState() {
-        <#code#>
+        
     }
     
     func showFailedToLoadState() {
-        <#code#>
+        
     }
     
     func showLoadedState(currentWeatherDetails: CurrentWeatherDetails, weatherDateInfo: WeatherDateInfo) {
-        <#code#>
+        if let loadedView = self.loadedView {
+            loadedView.configure(details: currentWeatherDetails, weatherDateInfo: weatherDateInfo)
+            
+            return
+        }
+        
+        let loadedView = SearchedCityLoadedView()
+        self.loadedView = loadedView
+        
+        loadedView.configure(details: currentWeatherDetails, weatherDateInfo: weatherDateInfo)
+        view.addSubview(loadedView)
+        
+        NSLayoutConstraint.activate([
+            loadedView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            loadedView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            loadedView.topAnchor.constraint(equalTo: view.topAnchor),
+            loadedView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        ])
     }
     
-    func handleExpectedBadWeather(with: ExpectedBadWeatherViewModel) {
-        <#code#>
+    func handleExpectedBadWeather(with expectedBadWeather: ExpectedBadWeatherViewModel) {
+        if let loadedView = self.loadedView {
+            loadedView.configure(expectedBadWeather: expectedBadWeather)
+            
+            return
+        }
     }
-    
-    
 }

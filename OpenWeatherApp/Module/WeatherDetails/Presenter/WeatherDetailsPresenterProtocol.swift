@@ -6,3 +6,11 @@
 //
 
 import Foundation
+
+protocol WeatherDetailsPresenterProtocol: AnyObject {
+    func viewDidLoad()
+    
+    func loadWeatherDetails(by: Coordinates)
+    
+    func navigateToFullView()
+}

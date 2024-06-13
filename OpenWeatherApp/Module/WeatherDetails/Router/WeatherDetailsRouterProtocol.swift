@@ -6,3 +6,11 @@
 //
 
 import Foundation
+
+protocol WeatherDetailsRouterProtocol: AnyObject {
+    static func createModule(with: Coordinates, showNavBar: Bool) -> WeatherDetailsViewProtocol
+    
+    static func createSearchedModule(with: CityViewModel) -> WeatherDetailsViewProtocol
+    
+    func navigateToFullView(with: Coordinates)
+}

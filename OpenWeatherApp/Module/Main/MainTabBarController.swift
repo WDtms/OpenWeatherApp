@@ -12,18 +12,21 @@ class MainTabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        let homeVC      = HomeRouter.createModule()
+        let searchVC    = SearchRouter.createModule()
+        
+        let homeNC      = UINavigationController(rootViewController: homeVC)
+        let searchNC    = UINavigationController(rootViewController: searchVC)
+        
+        homeNC.tabBarItem.title     = NSLocalizedString("home_tab_title", comment: "")
+        homeNC.tabBarItem.image     = UIImage(systemName: "house")
+        
+        searchNC.tabBarItem.title   = NSLocalizedString("search_tab_title", comment: "")
+        searchNC.tabBarItem.image   = UIImage(systemName: "magnifyingglass")
+        
+        tabBar.tintColor                = .label
+        tabBar.unselectedItemTintColor  = .secondaryLabel
+        
+        viewControllers = [homeNC, searchNC]
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

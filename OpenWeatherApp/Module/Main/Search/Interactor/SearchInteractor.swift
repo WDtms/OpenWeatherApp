@@ -23,4 +23,14 @@ class SearchInteractor: SearchInteractorProtocol {
             self.output?.handleFetch(with: result)
         }
     }
+    
+    func fetchSearchedCities() {
+        let locations = CoreDataManager.shared.fetchLastSearchedLocations()
+        
+        output?.handleSearchedCitiesFetch(cities: locations)
+    }
+    
+    func saveSearchedCity(city: CityViewModel) {
+        CoreDataManager.shared.addNewLocation(newLoc: city)
+    }
 }

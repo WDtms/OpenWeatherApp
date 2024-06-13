@@ -6,3 +6,9 @@
 //
 
 import Foundation
+
+enum ExpectedBadWeatherViewModel {
+    case rain(iconPath: String, Date)
+    case snow(iconPath: String, Date)
+    case none
+}

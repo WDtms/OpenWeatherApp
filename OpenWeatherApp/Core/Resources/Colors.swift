@@ -6,7 +6,8 @@
 //
 
 import Foundation
+import UIKit
 
 enum CustomColors {
-    static let backgroundColor = 
+    static let backgroundColor = UIColor(hex: "#F3F2F2")
 }

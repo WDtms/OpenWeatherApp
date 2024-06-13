@@ -6,3 +6,9 @@
 //
 
 import Foundation
+
+extension Double {
+    func fromKelvinToCelsius() -> Double {
+        self - 273.15
+    }
+}

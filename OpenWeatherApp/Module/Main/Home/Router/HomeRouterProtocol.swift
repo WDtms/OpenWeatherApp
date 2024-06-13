@@ -6,3 +6,7 @@
 //
 
 import Foundation
+
+protocol HomeRouterProtocol: AnyObject {
+    static func createModule() -> HomeViewProtocol
+}

@@ -6,3 +6,10 @@
 //
 
 import Foundation
+import UIKit
+
+protocol SearchViewProtocol: UIViewController {
+    func handleUpdatedSearchList(list: [CityViewModel])
+    
+    func handleSearchedCitiesFetch(cities: [CityViewModel])
+}

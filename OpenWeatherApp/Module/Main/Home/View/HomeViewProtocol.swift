@@ -6,3 +6,12 @@
 //
 
 import Foundation
+import UIKit
+
+protocol HomeViewProtocol: UIViewController {
+    func showLoadingState()
+    
+    func showUnknownLocationState()
+    
+    func showLocationedState(childVC: WeatherDetailsViewProtocol)
+}

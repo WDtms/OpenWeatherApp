@@ -6,3 +6,11 @@
 //
 
 import Foundation
+
+protocol SearchPresenterProtocol: AnyObject {
+    func fetchCities(startsWith name: String?)
+    
+    func handleTapped(on: CityViewModel)
+    
+    func fetchSavedSearchedCities()
+}

@@ -6,3 +6,14 @@
 //
 
 import Foundation
+import UIKit
+
+protocol WeatherDetailsViewProtocol: UIViewController { 
+    func showLoadingState()
+    
+    func showFailedToLoadState()
+    
+    func showLoadedState(currentWeatherDetails: CurrentWeatherDetails, weatherDateInfo: WeatherDateInfo)
+    
+    func handleExpectedBadWeather(with: ExpectedBadWeatherViewModel)
+}

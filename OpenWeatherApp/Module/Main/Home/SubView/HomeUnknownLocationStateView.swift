@@ -7,8 +7,8 @@
 
 import UIKit
 
-protocol UnknownLocationStateDelegate {
-    func askLocationPermission()
+protocol HomeUnknownLocationStateDelegate {
+    func requestLocationPermission()
 }
 
 class HomeUnknownLocationStateView: UIView {
@@ -18,7 +18,7 @@ class HomeUnknownLocationStateView: UIView {
     let messageLabel: UILabel = UILabel()
     let requestLocationButton = BaseButton()
     
-    var delegate: UnknownLocationStateDelegate?
+    var delegate: HomeUnknownLocationStateDelegate?
     
     required init?(coder: NSCoder) {
         fatalError()
@@ -44,7 +44,7 @@ class HomeUnknownLocationStateView: UIView {
     }
     
     @objc private func onButtonTapped() {
-        delegate?.askLocationPermission()
+        delegate?.requestLocationPermission()
     }
     
     private func configureMessageLabel() {
@@ -52,7 +52,6 @@ class HomeUnknownLocationStateView: UIView {
         messageLabel.textAlignment                              = .center
         messageLabel.font                                       = .systemFont(ofSize: 28)
         messageLabel.textColor                                  = .secondaryLabel
-        messageLabel.text                                       = "Oops! Looks like we don't know where you are. Give us location access."
         messageLabel.numberOfLines                              = 0
         messageLabel.text                                       = NSLocalizedString("no_access_to_location_message", comment: "No access to location message was shawn")
     }

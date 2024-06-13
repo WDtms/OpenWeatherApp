@@ -6,3 +6,9 @@
 //
 
 import Foundation
+
+protocol SearchRouterProtocol {
+    static func createModule() -> SearchViewProtocol
+    
+    func navigateToCityDetails(with: CityViewModel)
+}
