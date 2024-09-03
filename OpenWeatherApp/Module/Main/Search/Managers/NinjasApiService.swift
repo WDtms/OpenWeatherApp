@@ -8,17 +8,17 @@
 import Foundation
 import Alamofire
 
-class AmodeusAPIService {
-    static let shared: AmodeusAPIService = AmodeusAPIService()
+class NinjasApiService {
+    static let shared: NinjasApiService = NinjasApiService()
     
     private let session: Session
     
     private init() {
-        self.session = Session(interceptor: AmodeusAuthInterceptor())
+        self.session = Session()
     }
     
-    func fetchCities(request: CitiesRequest, completion: @escaping (Result<CitiesResponse, Error>) -> Void) {
-        let baseUrl = "https://test.api.amadeus.com/v1/reference-data/locations/cities"
+    func fetchCities(request: CitiesRequest, completion: @escaping (Result<[CityItemResponse], Error>) -> Void) {
+        let baseUrl = "https://api.api-ninjas.com/v1/city"
         
         var urlComponents = URLComponents(string: baseUrl)!
         urlComponents.queryItems = request.queryItems
@@ -28,7 +28,11 @@ class AmodeusAPIService {
             return
         }
         
-        session.request(url).validate(statusCode: 200..<300).responseDecodable(of: CitiesResponse.self) { response in
+        var urlRequest = URLRequest(url: url)
+        urlRequest.setValue("TdLoFetFDFCm2CYMZiossw==XQ5QTkLaJmD5heEC", forHTTPHeaderField: "X-Api-Key")
+        urlRequest.httpMethod = "GET"
+        
+        session.request(urlRequest).validate(statusCode: 200..<300).responseDecodable(of: [CityItemResponse].self) { response in
             switch response.result {
             case .success(let success):
                 completion(.success(success))

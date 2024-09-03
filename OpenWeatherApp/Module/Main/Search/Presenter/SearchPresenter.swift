@@ -63,16 +63,16 @@ extension SearchPresenter: SearchInteractorOutputProtocol {
         view?.handleSearchedCitiesFetch(cities: cities)
     }
     
-    func handleFetch(with result: Result<CitiesResponse, any Error>) {
+    func handleFetch(with result: Result<[CityItemResponse], any Error>) {
         switch result {
         case .success(let success):
-            let newCityList: [CityViewModel] = success.data?.compactMap { item in
-                guard let cityName = item.name, let latitude = item.geoCode?.latitude, let longitude = item.geoCode?.longitude, item.subType == "city" else {
+            let newCityList: [CityViewModel] = success.compactMap { item in
+                guard let cityName = item.name, let latitude = item.latitude, let longitude = item.longitude else {
                     return nil
                 }
                 
                 return CityViewModel(name: cityName, latitude: latitude, longitude: longitude)
-            } ?? []
+            }
             
             guard let startsWith = currentName?.lowercased() else { return }
             

@@ -15,9 +15,9 @@ class SearchInteractor: SearchInteractorProtocol {
     }
     
     func fetchCities(startsWith name: String) {
-        let request = CitiesRequest(expectedMaxCount: 40, keyword: name)
+        let request = CitiesRequest(name: name, limit: 40)
         
-        AmodeusAPIService.shared.fetchCities(request: request) { [weak self] result in
+        NinjasApiService.shared.fetchCities(request: request) { [weak self] result in
             guard let self = self else { return }
             
             self.output?.handleFetch(with: result)

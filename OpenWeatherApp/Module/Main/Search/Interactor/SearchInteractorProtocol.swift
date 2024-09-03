@@ -16,7 +16,7 @@ protocol SearchInteractorProtocol: AnyObject {
 }
 
 protocol SearchInteractorOutputProtocol: AnyObject {
-    func handleFetch(with result: Result<CitiesResponse, Error>)
+    func handleFetch(with result: Result<[CityItemResponse], Error>)
     
     func handleSearchedCitiesFetch(cities: [CityViewModel])
 }
